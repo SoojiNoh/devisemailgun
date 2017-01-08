@@ -1,4 +1,4 @@
-require "mailgun"
+
 
 class ForgotmailsController < ApplicationController
   before_action :set_forgotmail, only: [:show, :edit, :update, :destroy]

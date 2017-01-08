@@ -13,14 +13,29 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.default_url_options = {host: 'localhost', port: 3000}
+  config.action_mailer.default_url_options = {host: 'https://mailerlikelion-soojinoh.c9users.io'}
+  
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-    api_key: ENV["MAILGUN_API_KEY"],
-    domain: ENV["MAILGUN_DOMAIN"]
+
+  config.action_mailer.smtp_settings = { 
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 2525,
+    :domain => ENV["MAILGUN_DOMAIN"],
+    :user_name => ENV["MAILGUN_USER_NAME"],
+    :password => ENV["MAILGUN_PASSWORD"]
   }
+  
+
+  # Don't care if the mailer can't send.
+  #config.action_mailer.default_url_options = {host: 'localhost', port: 3000}
+  #config.action_mailer.raise_delivery_errors = false
+  #config.action_mailer.delivery_method = :mailgun
+  #config.action_mailer.mailgun_settings = {
+  #  api_key: ENV["MAILGUN_API_KEY"],
+  #  domain: ENV["MAILGUN_DOMAIN"]
+  #}
   
 
   # Print deprecation notices to the Rails logger.
