@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+보내는 이 : <%=@forgotmail.sender%> <br>
+받는 이 : <%=@forgotmail.reciever%> <br>
+제목 : <%=@forgotmail.title%> <br>
+내용 : <%=@forgotmail.content%> <br>
+
+<%= link_to 'Edit', edit_forgotmail_path(@forgotmail), class:  "btn btn-primary"  %> |
+<%= link_to 'Back', forgotmails_path,  class:  "btn btn-primary"  %>

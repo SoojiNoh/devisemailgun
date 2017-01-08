@@ -1,0 +1,1 @@
+json.array! @forgotmails, partial: 'forgotmails/forgotmail', as: :forgotmail

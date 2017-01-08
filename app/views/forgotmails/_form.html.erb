@@ -1,0 +1,36 @@
+<%= form_for(@forgotmail) do |f| %>
+  <% if @forgotmail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@forgotmail.errors.count, "error") %> prohibited this forgotmail from being saved:</h2>
+
+      <ul>
+      <% @forgotmail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="email-sender"%>
+    <%= f.label :sender, "보내는 이"%>
+    <%= f.text_field :sender, class: "form-control form-control-sm", id: "lgFormGroupInput", placeholder: "you@example.com" %>
+  </div>
+  
+  <div class="email-reciever"%>
+    <%= f.label :reciever, "받는 이"%>
+    <%= f.text_field :reciever, class: "form-control form-control-lg", id:"lgFormGroupInput", placeholder: "who@example.com" %>
+  </div>
+  
+  <div class="email-title"%>
+    <%= f.label :title, "이메일 제목"%>
+    <%= f.text_field :title %>
+  </div>
+  
+  <div class="email-content"%>
+    <%= f.label :content, "이메일 내용"%>
+    <%= f.text_area :content, size: "60x12" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "메일전송", class: "btn btn-primary"%>
+  </div>
+<% end %>

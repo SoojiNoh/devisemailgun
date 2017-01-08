@@ -1,0 +1,1 @@
+json.partial! "forgotmails/forgotmail", forgotmail: @forgotmail
