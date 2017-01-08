@@ -2,7 +2,7 @@ require "mailgun"
 
 class ForgotmailsController < ApplicationController
   before_action :set_forgotmail, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /forgotmails
   # GET /forgotmails.json
   def index
@@ -26,21 +26,10 @@ class ForgotmailsController < ApplicationController
   # POST /forgotmails
   # POST /forgotmails.json
   def create
+    @user = current_user;
     @forgotmail = Forgotmail.new(forgotmail_params)
-
-    mg_client = Mailgun::Client.new("key-f49fb991df17fee616ca9c08a5bf8ea4")
     
-    message_params =  {
-                       from: @forgotmail.sender,
-                       to:   @forgotmail.reciever,
-                       subject: @forgotmail.title,
-                       text:   @forgotmail.content
-                      }
-    
-    result = mg_client.send_message('sandboxdfe181a1ffc54b66bef1a7ce08ac6b83.mailgun.org', message_params).to_h!
-    
-    message_id = result['id']
-    message = result['message']
+    Usermailer.welcome_email(@user, @forgotmail.sender, @forgotmail.reciever, @forgotmail.title, @forgotmail.content).deliver_now
 
     respond_to do |format|
       if @forgotmail.save
